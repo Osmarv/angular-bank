@@ -1,0 +1,60 @@
+{
+    "clients": [
+      {
+        "id": 1,
+        "name": "Client 1",
+        "accounts": [
+          {
+            "id": 1,
+            "number": "123456789",
+            "balance": 10000
+          },
+          {
+            "id": 2,
+            "number": "987654321",
+            "balance": 5000
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Client 2",
+        "accounts": [
+          {
+            "id": 1,
+            "number": "456789123",
+            "balance": 20000
+          }
+        ]
+      }
+    ],
+    "transactions": [
+      {
+        "id": 1,
+        "clientId": 1,
+        "accountId": 1,
+        "type": "debit",
+        "amount": 1000,
+        "status": "open",
+        "timestamp": "2023-03-21T12:00:00Z"
+      },
+      {
+        "id": 2,
+        "clientId": 1,
+        "accountId": 2,
+        "type": "credit",
+        "amount": 2000,
+        "status": "processing",
+        "timestamp": "2023-03-21T13:00:00Z"
+      },
+      {
+        "id": 3,
+        "clientId": 2,
+        "accountId": 1,
+        "type": "debit",
+        "amount": 500,
+        "status": "finalized",
+        "timestamp": "2023-03-21T14:00:00Z"
+      }
+    ]
+  }
