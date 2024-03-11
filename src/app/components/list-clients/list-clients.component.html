@@ -1,9 +1,11 @@
-<h2>Clients</h2>
-<ul>
-    <li *ngFor="let client of clients">
-        <p>{{ client.name }}</p>
-               
-    <li *ngFor="let account of accounts">
-        <p>{{account.number}}</p>
-        <p>{{account.balance}}</p>
-</ul>
+<main>
+  <section>
+    <h2>Clients</h2>
+
+    <ng-container *ngFor="let client of clients">
+      <p (click)="getAccounts(client)">{{ client.name }}</p>
+    </ng-container>
+  </section>
+
+  <app-list-accounts [accounts]="clientAccounts"></app-list-accounts>
+</main>

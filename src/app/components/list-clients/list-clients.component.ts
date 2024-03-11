@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { BankServicesService } from 'src/app/services/bank-services.service';
 
-import { Client } from 'src/app/Client';
-import { Account } from 'src/app/Account';
+import { Account, Client } from 'src/app/models';
+import { AccountsService } from 'src/app/services/account/account.service';
 
 @Component({
   selector: 'app-list-clients',
@@ -11,22 +11,24 @@ import { Account } from 'src/app/Account';
   styleUrls: ['./list-clients.component.css']
 })
 export class ListClientsComponent implements OnInit {
-  clients: Client[] = []
-  accounts: Account[] = []
-  
-  constructor(private bankServices: BankServicesService) {
-  this.getClients();
-  this.getAccounts();
-}
+  clients: Client[] = [];
+  clientAccounts: Account[] = [];
 
-ngOnInit(): void {}
+  constructor(
+    private readonly bankServices: BankServicesService,
+    private readonly accountService: AccountsService
+  ) { }
 
-getClients(): void{
-  this.bankServices.getAllClients().subscribe((clients) => this.clients = clients)
-}
+  ngOnInit(): void {
+    this.getClients();
+  }
 
-getAccounts(): void{
-  this.bankServices.getAllAccounts().subscribe((accounts) => this.accounts = accounts)
-}
- 
+  getClients(): void {
+    this.bankServices.getAllClients().subscribe((clients) => this.clients = clients)
+  }
+
+  getAccounts(client: Client): void {
+    this.accountService.getAllFromClient(client.id)
+      .subscribe(acc => this.clientAccounts = acc);
+  }
 }

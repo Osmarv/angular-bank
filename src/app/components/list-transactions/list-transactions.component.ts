@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { map, switchMap } from 'rxjs';
 
-import { Transaction } from 'src/app/Transaction';
+import { Transaction } from 'src/app/models';
+import { AccountsService } from 'src/app/services/account/account.service';
 
-import { BankServicesService } from 'src/app/services/bank-services.service';
+import { ClientService } from 'src/app/services/client/client.service';
 
 @Component({
   selector: 'app-list-transactions',
   templateUrl: './list-transactions.component.html',
   styleUrls: ['./list-transactions.component.css']
 })
-export class ListTransactionsComponent implements OnInit {
-  transactions: Transaction[] = []
-  
-    constructor(private bankServices: BankServicesService) {
-    this.getTransactions();
-  }
+export class ListTransactionsComponent {
+  @Input() accountId: number | null = null;
+  @Input() transactions: Transaction[] = []
 
-  ngOnInit(): void {}
+  constructor(
+    private readonly accountService: AccountsService,
+    private readonly clientService: ClientService
+  ) { }
 
-  getTransactions(): void{
-    this.bankServices.getAll().subscribe((transactions) => this.transactions = transactions)
+  getName(accountId: number) {
+    return this.accountService.getItem(accountId)
+      .pipe(
+        switchMap(acc => this.clientService.getItem(acc.client_id)),
+        map(client => client.name),
+      );
   }
 }

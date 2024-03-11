@@ -1,5 +1,15 @@
-<h2>Transactions</h2>
-<ul>
-    <li *ngFor="let transaction of transactions">
-    <p>{{ transaction.accountId }} - amount: {{ transaction.amount }}</p>
-</ul>
+<h2>Transactions {{ accountId }}</h2>
+<table>
+    <ng-container *ngFor="let transaction of transactions">
+        <tr>
+            <ng-container *ngIf="transaction.from_account_id == accountId">
+                <td>{{ transaction.to_account_id }} ({{ getName(transaction.to_account_id) | async }})</td>
+                <td style="color: red; font-weight: bold;">{{ transaction.amount }}</td>
+            </ng-container>
+            <ng-container *ngIf="transaction.to_account_id == accountId">
+                <td>{{ transaction.from_account_id }} ({{ getName(transaction.from_account_id) | async }})</td>
+                <td style="font-weight: bold;">{{ transaction.amount }}</td>
+            </ng-container>
+        </tr>
+    </ng-container>
+</table>
