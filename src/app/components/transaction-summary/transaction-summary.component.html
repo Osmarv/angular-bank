@@ -1,0 +1,9 @@
+<div class="popup" #popup *ngIf="transaction">
+  <main>
+    <h3>{{type}}</h3>
+    <p>{{transaction!.amount}}</p>
+    <p>{{transaction!.status}}</p>
+    <p>Opened at {{transaction!.opened_date | date}}</p>
+  </main>
+  <div class="close-button clickable" (click)="closePopup()"></div>
+</div>

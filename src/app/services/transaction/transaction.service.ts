@@ -40,7 +40,7 @@ export class TransactionsService {
     return merge(debits, credits).pipe(
       toArray(),
       map(arr => arr[0].concat(arr[1])),
-      map(all => all.sort((a, b) => a.opened_date.localeCompare(b.opened_date)))
+      map(all => all.sort((a, b) => a.opened_date!.localeCompare(b.opened_date!)))
     );
   }
 

@@ -3,9 +3,9 @@
     <h2>Clients</h2>
 
     <ng-container *ngFor="let client of clients">
-      <p (click)="getAccounts(client)">{{ client.name }}</p>
+      <p class="clickable" (click)="getAccounts(client)">{{ client.name }}</p>
     </ng-container>
   </section>
 
-  <app-list-accounts [accounts]="clientAccounts"></app-list-accounts>
+  <app-client-summary [client]="currentClient"></app-client-summary>
 </main>

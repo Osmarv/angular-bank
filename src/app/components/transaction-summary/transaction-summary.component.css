@@ -1,0 +1,20 @@
+.popup {
+  position: absolute;
+  margin: auto;
+  min-height: 20vh;
+  min-width: 20vh;
+  padding: 12px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.close-button {
+  background-color: red;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}

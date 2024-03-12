@@ -1,10 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { map, switchMap } from 'rxjs';
 
 import { Transaction } from 'src/app/models';
-import { AccountsService } from 'src/app/services/account/account.service';
-
-import { ClientService } from 'src/app/services/client/client.service';
 
 @Component({
   selector: 'app-list-transactions',
@@ -14,17 +10,15 @@ import { ClientService } from 'src/app/services/client/client.service';
 export class ListTransactionsComponent {
   @Input() accountId: number | null = null;
   @Input() transactions: Transaction[] = []
+  shownTransaction?: number;
 
-  constructor(
-    private readonly accountService: AccountsService,
-    private readonly clientService: ClientService
-  ) { }
+  showSummary(transaction: Transaction) {
+    this.shownTransaction = undefined;
+    this.shownTransaction = transaction.id;
+  }
 
-  getName(accountId: number) {
-    return this.accountService.getItem(accountId)
-      .pipe(
-        switchMap(acc => this.clientService.getItem(acc.client_id)),
-        map(client => client.name),
-      );
+  hideSummary() {
+    this.shownTransaction = undefined;
+    console.log(this.shownTransaction)
   }
 }

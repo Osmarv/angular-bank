@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { BankServicesService } from 'src/app/services/bank-services.service';
 
-import { Account, Client } from 'src/app/models';
+import { Client } from 'src/app/models';
 import { AccountsService } from 'src/app/services/account/account.service';
 
 @Component({
@@ -12,7 +12,7 @@ import { AccountsService } from 'src/app/services/account/account.service';
 })
 export class ListClientsComponent implements OnInit {
   clients: Client[] = [];
-  clientAccounts: Account[] = [];
+  currentClient: Client | null = null;
 
   constructor(
     private readonly bankServices: BankServicesService,
@@ -28,7 +28,6 @@ export class ListClientsComponent implements OnInit {
   }
 
   getAccounts(client: Client): void {
-    this.accountService.getAllFromClient(client.id)
-      .subscribe(acc => this.clientAccounts = acc);
+    this.currentClient = client;
   }
 }

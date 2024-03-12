@@ -1,6 +1,7 @@
 <h2>Accounts</h2>
 <ng-container *ngFor="let account of accounts">
-  <p (click)="setAccount(account.id)">Account number: {{ account.id }}</p>
+  <p class="clickable" (click)="setAccount(account.id)">Account number: {{ account.id }}</p>
 </ng-container>
 
-<app-list-transactions [transactions]="transactions" [accountId]="currentAccount"></app-list-transactions>
+<app-list-transactions *ngIf="transactions.length" [transactions]="transactions"
+  [accountId]="currentAccount"></app-list-transactions>

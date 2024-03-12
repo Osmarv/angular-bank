@@ -1,0 +1,6 @@
+<ng-container *ngIf="client">
+  <h2>{{ client.name }}</h2>
+  <p>Member since {{client.created_date | date}}</p>
+
+  <app-list-accounts [accounts]="clientAccounts"></app-list-accounts>
+</ng-container>
